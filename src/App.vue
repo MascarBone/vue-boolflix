@@ -1,28 +1,45 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>RICERCA</h1>
+
+    <Searchbar @search="evento"/>
+
+    <Catalog />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
+
+import Searchbar from './components/Searchbar.vue';
+import Catalog from './components/Catalog.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Searchbar,
+    Catalog,
+  },
+
+  methods: {
+    evento(needleQuery) {
+        console.log(needleQuery);
+
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=4b29211095001d1a2e8e6ee5ce71ec04&query=' + needleQuery)
+        .then((response) => {
+            console.log(response);
+        })
+    }
+  },
 }
 </script>
 
 <style lang="scss">
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
