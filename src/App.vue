@@ -34,8 +34,9 @@ export default {
         axios.get('https://api.themoviedb.org/3/search/movie?api_key=4b29211095001d1a2e8e6ee5ce71ec04&query=' + needleQuery)
         .then((response) => {
             console.log(response.data.results);
-            // this.movies = response.data.results.slice();
+
             this.movies = [...response.data.results];
+            
             console.log(this.movies);
         })
     }
