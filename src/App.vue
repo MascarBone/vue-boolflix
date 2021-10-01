@@ -4,7 +4,7 @@
 
     <Searchbar @search="evento"/>
 
-    <Catalog />
+    <Catalog :list="movies"/>
   </div>
 </template>
 
