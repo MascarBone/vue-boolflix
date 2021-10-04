@@ -21,6 +21,9 @@
                         <i :class="n <= stars ? 'fas fa-star' : 'far fa-star'"></i>
                     </span>
                 </div>
+
+                <Credits :movieID="card.id" :apikey="apikey"/>
+
                 <p>Overview - {{card.overview}}</p>
             </div>
         </div>
@@ -32,13 +35,18 @@
 </template>
 
 <script>
-
+import Credits from './Credits.vue'
 
 export default {
     name: 'Card',
 
+    components: {
+        Credits,
+    },
+
     props: {
         card: Object,
+        apikey: String,
     },
 
     computed: {
@@ -69,6 +77,7 @@ export default {
     .poster {
         position: relative;
         background-color: black;
+        height: 460px;
     }
     .poster_img {
         z-index: 0;
@@ -85,6 +94,9 @@ export default {
         top: 10px;
         z-index: -1;
 
+        i {
+            color: goldenrod;
+        }
         > * {
             margin-bottom: 8px;
         }

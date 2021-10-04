@@ -2,7 +2,7 @@
   <div id="app">
     <Searchbar @search="searchAPI"/>
 
-    <Catalog :moviesList="movies" :seriesList="series"/>
+    <Catalog :moviesList="movies" :seriesList="series" :apikey="codeApiKey"/>
 
   </div>
 </template>
