@@ -26,8 +26,7 @@ export default {
     },
 
     created: function() {
-        // console.log(this.type, this.index);
-    // }
+        // const array = [];
             axios.get(this.linkAPICredit + this.type + '/' + this.index + '/credits', {
                 params : {
                     api_key: this.apikey,
@@ -38,8 +37,10 @@ export default {
                 for (const element of repsonse.data.cast)
                 {                    
                     if(this.listNames.length < 5)
-                    {                        
-                        this.listNames.push(element.name);
+                    {      
+                        this.listNames.push(this.fullname(element.name.split(' ')));                  
+                        // this.listNames.push(element.name);
+                        // array.push(this.fullname(element.name.split(' ')));
                         continue;
                     }
                     else
@@ -47,10 +48,20 @@ export default {
                         break;
                     }
                 }
-                
-                console.log(this.listNames);
+                // console.log(array);
+                // console.log(this.listNames);
+
             });
     
+    },
+
+    /**
+     * Funzione che ritorna solo il primo e l'ultimo elemento di un array
+     */
+    methods: {
+        fullname: function(array) {
+            return [array[0],array[array.length-1]].join(' ');
+        }
     },
 }
 </script>

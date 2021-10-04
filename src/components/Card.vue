@@ -96,7 +96,7 @@ export default {
         color: white;
         padding: 20px;
         position: absolute;
-        top: 10px;
+        top: 0;
         z-index: -1;
 
         i {
