@@ -1,5 +1,11 @@
 <template>
   <div>
+        <div v-if="card.backdrop_path">
+            <img :src="'https://image.tmdb.org/t/p/' + 'w300/' + card.backdrop_path" alt="">
+        </div>
+        <div v-else class="img-else">
+            <img src="https://c.tenor.com/5JunKCV2DEIAAAAC/error404-404.gif" alt="">
+        </div>
         <p>Titolo -  {{ card.title ? card.title : card.name}}</p>
         <p>Tittolo originale - {{ card.original_title ? card.original_title : card.original_name}}</p>
         <div class="language-box">
@@ -7,7 +13,8 @@
             <img v-else-if="languageGB(card.original_language)" src="../assets/flag_gb.svg" alt="">
             <span v-else>Lingua - {{card.original_language}} </span>
         </div>
-        <p>Voto - {{card['vote_average']}}</p> 
+        <p>Voto - {{card['vote_average']}}</p>
+        <div>ciao <i class="fas fa-star"></i> </div>
   </div>
 </template>
 
@@ -32,6 +39,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+    .img-else {
+        width: 300px;
+        
+        img {
+            width: 100%;
+        }
+    }
 
     .language-box {
         img {

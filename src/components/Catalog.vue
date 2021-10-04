@@ -8,8 +8,8 @@
         </div>
         <div class="row justify-content-center">
             <h2 class="col-12">Series</h2>
-            <div class="col-3">
-                <Card v-for="element in seriesList" :key="element.id" :card="element"/>
+            <div v-for="element in seriesList" :key="element.id" class="col-3">
+                <Card :card="element"/>
             </div>
         </div>
     </div>
