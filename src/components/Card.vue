@@ -13,8 +13,12 @@
             <img v-else-if="languageGB(card.original_language)" src="../assets/flag_gb.svg" alt="">
             <span v-else>Lingua - {{card.original_language}} </span>
         </div>
-        <p>Voto - {{card['vote_average']}}</p>
-        <div>ciao <i class="fas fa-star"></i> </div>
+        <p>Voto - {{card.vote_average}}</p>
+        <div>
+            <span v-for="n in 5" :key="n">
+                <i :class="n <= stars ? 'fas fa-star' : 'far fa-star'"></i>
+            </span>
+        </div>
   </div>
 </template>
 
@@ -24,6 +28,12 @@ export default {
 
     props: {
         card: Object,
+    },
+
+    computed: {
+        stars: function() {
+            return Math.ceil(this.card.vote_average / 2);
+        }
     },
 
     methods: {
