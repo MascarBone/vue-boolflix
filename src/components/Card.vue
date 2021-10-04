@@ -22,7 +22,7 @@
                     </span>
                 </div>
 
-                <Credits :movieID="card.id" :apikey="apikey"/>
+                <Credits :type="creditType" :index="card.id" :apikey="apikey"/>
 
                 <p>Overview - {{card.overview}}</p>
             </div>
@@ -47,6 +47,7 @@ export default {
     props: {
         card: Object,
         apikey: String,
+        creditType: String,
     },
 
     computed: {
@@ -64,7 +65,12 @@ export default {
                 return el.includes('en');
             },
         },
-    }
+    
+    created: function() {
+        console.log(this.creditType);
+    },
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -77,7 +83,6 @@ export default {
     .poster {
         position: relative;
         background-color: black;
-        height: 460px;
     }
     .poster_img {
         z-index: 0;

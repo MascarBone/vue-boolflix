@@ -1,7 +1,9 @@
 <template>
-  <div>
-      
-  </div>
+    <div>
+        <span v-for="(element, index) in listNames" :key="index">
+            {{element}};
+        </span>
+    </div>
 </template>
 
 <script>
@@ -11,19 +13,22 @@ export default {
     name: 'Credits',
 
     props: {
-        movieID: Number,
+        type: String,
+        index: Number,
         apikey: String,
     },
 
     data: function() {
         return {
             linkAPICredit: 'https://api.themoviedb.org/3/',
+            listNames: [],
         }
     },
 
     created: function() {
-            const array = [];
-            axios.get(this.linkAPICredit + 'movie/' + this.movieID + '/credits', {
+        // console.log(this.type, this.index);
+    // }
+            axios.get(this.linkAPICredit + this.type + '/' + this.index + '/credits', {
                 params : {
                     api_key: this.apikey,
                 }
@@ -31,14 +36,19 @@ export default {
             .then((repsonse) => {
                 // console.log(repsonse.data.cast);
                 for (const element of repsonse.data.cast)
-                {
-                    
-                    console.log(element);
-                    array.push(element.name);
+                {                    
+                    if(this.listNames.length < 5)
+                    {                        
+                        this.listNames.push(element.name);
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
                 
-                console.log(array);
-
+                console.log(this.listNames);
             });
     
     },
