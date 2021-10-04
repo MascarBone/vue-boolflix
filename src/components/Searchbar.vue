@@ -1,7 +1,7 @@
 <template>
   <div>
       <form>
-            <input type="text" v-model="needle">
+            <input type="text" v-model.trim="needle">
             <button @click.prevent="$emit('search',needle)" type="submit">Cerca</button>
 
       </form>      

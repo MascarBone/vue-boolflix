@@ -1,70 +1,39 @@
 <template>
-    <div class="box-list">
-        <div>
-            <h2>Movies</h2>
-            <ul>
-                <li v-for="element in moviesList" :key="element.id">
-                    <p>Titolo -  {{element.title}}</p>
-                    <p>Tittolo originale - {{element['original_title']}} </p>
-                    <p>
-                        <span>Lingua - </span>
-
-                        <img v-if="languageIT(element['original_language'])" src="../assets/flag_it.svg" alt="">
-                        <img v-else-if="languageGB(element['original_language'])" src="../assets/flag_gb.svg" alt="">
-                        <span v-else> {{element['original_language']}} </span>
-                    </p>
-                    <p>Voto - {{element['vote_average']}}</p> 
-                </li>
-            </ul>
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <h2 class="col-12">Movies</h2>
+            <div v-for="element in moviesList" :key="element.id" class="col-3">
+                <Card :card="element"/>
+            </div>
         </div>
-        <div>
-            <h2>Series</h2>
-            <ul>
-                <li v-for="element in seriesList" :key="element.id">
-                    <p>Tittolo - {{element['original_name']}} </p>
-                    <p>
-                        <span>Lingua - </span>
-
-                        <img v-if="languageIT(element['original_language'])" src="../assets/flag_it.svg" alt="">
-                        <img v-else-if="languageGB(element['original_language'])" src="../assets/flag_gb.svg" alt="">
-                        <span v-else> {{element['original_language']}} </span>
-                    </p>
-                    <p>Voto - {{element['vote_average']}}</p> 
-                </li>
-            </ul>
+        <div class="row justify-content-center">
+            <h2 class="col-12">Series</h2>
+            <div class="col-3">
+                <Card v-for="element in seriesList" :key="element.id" :card="element"/>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import Card from './Card.vue';
+
 export default {
     name: 'Catalog',
+
+    components: {
+        Card,
+    },
 
     props: {
         moviesList: Array,
         seriesList: Array,
     },
     
-    methods: {
-        languageIT(el) {
-            return el.includes('it');
-        },
-
-        languageGB(el) {           
-            return el.includes('en');
-        },
-    },
+    
 }
 </script>
 
 <style scoped lang="scss">
-    .box-list {
-        display: flex;
-    }
-    p {
-        img {
-            width: 50px;
-            vertical-align: middle;
-        }
-    }
+
 </style>
