@@ -1,28 +1,39 @@
 <template>
   <div>
-        <div v-if="card.backdrop_path">
-            <img :src="'https://image.tmdb.org/t/p/' + 'w300/' + card.backdrop_path" alt="">
+        <div class="poster">
+            <div v-if="card.poster_path" class="poster_img">
+                <img :src="'https://image.tmdb.org/t/p/' + 'w342/' + card.poster_path" alt="">
+            </div>
+            <div v-else class="poster_img">
+                <img src="https://c.tenor.com/5JunKCV2DEIAAAAC/error404-404.gif" alt="">
+            </div>
+
+            <div class="poster_text">
+                <p>Titolo -  {{ card.title ? card.title : card.name}}</p>
+                <p>Tittolo originale - {{ card.original_title ? card.original_title : card.original_name}}</p>
+                <div class="language-box">
+                    <img v-if="languageIT(card.original_language)" src="../assets/flag_it.svg" alt="">
+                    <img v-else-if="languageGB(card.original_language)" src="../assets/flag_gb.svg" alt="">
+                    <span v-else>Lingua - {{card.original_language}} </span>
+                </div>
+                <div>
+                    <span v-for="n in 5" :key="n">
+                        <i :class="n <= stars ? 'fas fa-star' : 'far fa-star'"></i>
+                    </span>
+                </div>
+                <p>Overview - {{card.overview}}</p>
+            </div>
         </div>
-        <div v-else class="img-else">
-            <img src="https://c.tenor.com/5JunKCV2DEIAAAAC/error404-404.gif" alt="">
-        </div>
-        <p>Titolo -  {{ card.title ? card.title : card.name}}</p>
-        <p>Tittolo originale - {{ card.original_title ? card.original_title : card.original_name}}</p>
-        <div class="language-box">
-            <img v-if="languageIT(card.original_language)" src="../assets/flag_it.svg" alt="">
-            <img v-else-if="languageGB(card.original_language)" src="../assets/flag_gb.svg" alt="">
-            <span v-else>Lingua - {{card.original_language}} </span>
-        </div>
-        <p>Voto - {{card.vote_average}}</p>
-        <div>
-            <span v-for="n in 5" :key="n">
-                <i :class="n <= stars ? 'fas fa-star' : 'far fa-star'"></i>
-            </span>
-        </div>
+        
+        
+
+        
   </div>
 </template>
 
 <script>
+
+
 export default {
     name: 'Card',
 
@@ -51,11 +62,31 @@ export default {
 <style scoped lang="scss">
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-    .img-else {
-        width: 300px;
-        
+    *{
+        text-align: start;
+
+    }
+    .poster {
+        position: relative;
+        background-color: black;
+    }
+    .poster_img {
+        z-index: 0;
+        width: 100%;
+
         img {
             width: 100%;
+        }
+    }
+    .poster_text {
+        color: white;
+        padding: 20px;
+        position: absolute;
+        top: 10px;
+        z-index: -1;
+
+        > * {
+            margin-bottom: 8px;
         }
     }
 
@@ -64,5 +95,13 @@ export default {
             width: 50px;
             vertical-align: middle;
         }
+    }
+
+
+    .poster:hover .poster_img{
+        opacity: 0;
+    }
+    .poster:hover .poster_text{
+        z-index: 1;
     }
 </style>

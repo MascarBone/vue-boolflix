@@ -1,4 +1,5 @@
 <template>
+<div class="wrapper">
     <div class="container">
         <div class="row mb-5 justify-content-center">
             <h2 class="col-12">Movies</h2>
@@ -13,6 +14,8 @@
             </div>
         </div>
     </div>
+</div>
+    
 </template>
 
 <script>
@@ -35,5 +38,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '../style/variables.scss';
 
+.wrapper {
+    background-color: $bg-page;
+}
 </style>

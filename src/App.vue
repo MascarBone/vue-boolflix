@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <h1>RICERCA</h1>
-
     <Searchbar @search="searchAPI"/>
 
     <Catalog :moviesList="movies" :seriesList="series"/>
@@ -83,8 +81,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  // CSS DA RIVEDERE
-  text-align: center;
 }
 </style>
