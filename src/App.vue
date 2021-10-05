@@ -2,7 +2,9 @@
   <div id="app">
     <Searchbar @search="searchAPI"/>
 
-    <Catalog :moviesList="movies" :seriesList="series" :apikey="apikey"/>
+    <!-- <Catalog :moviesList="movies" :seriesList="series" :apikey="apikey"/> -->
+    <Catalog :mediaList="media" :apikey="apikey"/>
+
 
   </div>
 </template>
@@ -24,10 +26,12 @@ export default {
     return {
       movies : [],
       series : [],
+      media : [],
 
       apikey: '4b29211095001d1a2e8e6ee5ce71ec04',
-      APIMovies : 'https://api.themoviedb.org/3/search/movie',
-      APITvseries : 'https://api.themoviedb.org/3/search/tv',
+      APIMovies: 'https://api.themoviedb.org/3/search/movie',
+      APITvseries: 'https://api.themoviedb.org/3/search/tv',
+      APIMulti: 'https://api.themoviedb.org/3/search/multi',
 
     }
   },
@@ -36,40 +40,53 @@ export default {
     searchAPI(needleQuery) {
         console.log(needleQuery);
 
-        // axios.get('https://api.themoviedb.org/3/search/movie?api_key=4b29211095001d1a2e8e6ee5ce71ec04&query=' + needleQuery)
-        axios.get(this.APIMovies, {
-          params : {            
-            api_key: this.apikey ,
+        // axios.get(this.APIMovies, {
+        //   params : {            
+        //     api_key: this.apikey ,
+        //     query: needleQuery,
+        //   }
+        // })
+        // .then((response) => {
+        //     console.log(response.data.results);
+
+        //     this.movies = [...response.data.results];
+
+        //     console.log(this.movies);
+        // })
+        // .catch((error) => {
+        //   console.log(error);
+        // });
+
+        // axios.get(this.APITvseries, {
+        //   params : {            
+        //     'api_key': this.apikey ,
+        //     query: needleQuery,
+        //   }
+        // })
+        // .then((response) => {
+        //     console.log(response.data.results);
+
+        //     this.series = [...response.data.results]
+
+        //     console.log(this.series);
+        // })
+        // .catch((error) => {
+        //   console.log(error);
+        // });
+
+        // this.eventoProva(needleQuery);
+        axios.get(this.APIMulti , {
+          params: {
+            api_key: this.apikey,
             query: needleQuery,
           }
         })
         .then((response) => {
-            console.log(response.data.results);
-
-            this.movies = [...response.data.results];
-
-            console.log(this.movies);
+          console.log('eventoMultiSearch');
+          console.log(response);
+          this.media = [...response.data.results];
+          console.log(this.media);
         })
-        .catch((error) => {
-          console.log(error);
-        });
-
-        axios.get(this.APITvseries, {
-          params : {            
-            'api_key': this.apikey ,
-            query: needleQuery,
-          }
-        })
-        .then((response) => {
-            console.log(response.data.results);
-
-            this.series = [...response.data.results]
-
-            console.log(this.series);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     },
    
   },

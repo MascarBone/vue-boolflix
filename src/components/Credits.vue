@@ -14,13 +14,13 @@ export default {
 
     props: {
         type: String,
-        index: Number,
+        mediaID: Number,
         apikey: String,
     },
 
     data: function() {
         return {
-            linkAPICredit: 'https://api.themoviedb.org/3/'+ this.type + '/' + this.index + '/credits',
+            linkAPICredit: 'https://api.themoviedb.org/3/'+ this.type + '/' + this.mediaID + '/credits',
             listNames: [],
         }
     },

@@ -1,11 +1,11 @@
 <template>
 <div class="wrapper">
     <div class="container">
-        <div class="row mb-5 justify-content-center">
+        <!-- <div class="row mb-5 justify-content-center">
             <h2 class="col-12">Movies</h2>
             <div v-for="element in moviesList" :key="element.id" class="col-3">
 
-                <Card :genres="funzioneG(element.genre_ids, movieGenres)" :creditType="'movie'" :card="element" :apikey="apikey"/>
+                <Card :genres="filteredGenres(element.genre_ids, movieGenres)" :creditType="'movie'" :card="element" :apikey="apikey"/>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -13,7 +13,21 @@
             <div v-for="element in seriesList" :key="element.id" class="col-3">
                 <Card :creditType="'tv'" :card="element" :apikey="apikey"/>
             </div>
+        </div> -->
+        
+        <div class="row mb-5 justify-content-center">
+            <h2 class="col-12">Movies</h2>
+            <div v-for="element in filteredMovies" :key="element.id" class="col-3">
+                <Card :genres="filteredGenres(element.genre_ids, movieGenres)" :card="element" :apikey="apikey"/>
+            </div>
         </div>
+        <div class="row justify-content-center">
+            <h2 class="col-12">Series</h2>
+            <div v-for="element in filteredSeries" :key="element.id" class="col-3">
+                <Card :card="element" :apikey="apikey"/>
+            </div>
+        </div>
+
     </div>
 </div>
     
@@ -44,7 +58,18 @@ export default {
     props: {
         moviesList: Array,
         seriesList: Array,
+        mediaList: Array,
         apikey: String,
+    },
+    
+    computed: {
+        filteredMovies: function() {
+            return this.mediaList.filter(element => element.media_type == 'movie');
+        },
+
+        filteredSeries: function() {
+            return this.mediaList.filter(element => element.media_type == 'tv');
+        }
     },
 
     methods: {
@@ -55,16 +80,15 @@ export default {
          * @param {array} genres un array di oggetti, con l'id del genere ed il nome
          * @return {array} ritorna un array come genres filtrato per ids
          */
-        funzioneG(ids, genres) {
-            // console.log('funzioneG');
+        filteredGenres(ids, genres) {
+            // console.log('filteredGenres');
             // console.log(ids);
             // console.log(genres);
-            
             // let arrayR = [];
-            // return genres.filter(element => ids.includes(element.id)).map(x => x.name)
+            // arrayR = genres.filter(element => ids.includes(element.id)).map(x => x.name)
+            // console.log(arrayR);
 
             return genres.filter(element => ids.includes(element.id));
-            // console.log(arrayR);
         }        
     },
     

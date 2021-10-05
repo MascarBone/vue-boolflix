@@ -22,7 +22,7 @@
                     </span>
                 </div>
 
-                <Credits :type="creditType" :index="card.id" :apikey="apikey"/>
+                <Credits :type="card.media_type" :mediaID="card.id" :apikey="apikey"/>
 
                 <div>
                     <span class="me-1" v-for="element in genres" :key="element.id">• {{element.name}}</span>
@@ -59,7 +59,7 @@ export default {
     props: {
         card: Object,
         apikey: String,
-        creditType: String,
+        // creditType: String,
         genres: Array,
     },
 
