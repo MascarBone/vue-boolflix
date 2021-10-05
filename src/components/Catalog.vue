@@ -16,6 +16,9 @@
         </div> -->
         
         <div class="row mb-5 justify-content-center">
+            <div class="col-12">
+                <Genres :genres="movieGenres" @selection="storeData"/>
+            </div>
             <h2 class="col-12">Movies</h2>
             <div v-for="element in filteredMovies" :key="element.id" class="col-3">
                 <Card :genres="filteredGenres(element.genre_ids, movieGenres)" :card="element" :apikey="apikey"/>
@@ -37,12 +40,14 @@
 import axios from 'axios';
 
 import Card from './Card.vue';
+import Genres from './Genres.vue';
 
 export default {
     name: 'Catalog',
 
     components: {
         Card,
+        Genres,
     },
 
     data: function() {
@@ -73,7 +78,9 @@ export default {
     },
 
     methods: {
-
+        storeData(el) {
+            console.log(el);
+        },
         /**
          * Funzione che restituisce un array di oggetti, contente l'id del genere ed il nome del genere
          * @param {array} ids un array contenente gli di presenti nel file
