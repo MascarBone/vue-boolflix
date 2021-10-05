@@ -1,11 +1,11 @@
 <template>
   <div>
         <div class="poster">
-            <div v-if="card.poster_path" class="poster_img">
-                <img :src="'https://image.tmdb.org/t/p/' + 'w342/' + card.poster_path" alt="">
+            <div class="poster_img">
+                <img v-if="card.poster_path" :src="imgPath + 'w342/' + card.poster_path" :alt="card.title ? card.title : card.name">
+                <img v-else :src="imgPathAlt" :alt="card.title ? card.title : card.name">
             </div>
-            <div v-else class="poster_img">
-                <img src="https://c.tenor.com/5JunKCV2DEIAAAAC/error404-404.gif" alt="">
+            <div  class="poster_img">
             </div>
 
             <div class="poster_text">
@@ -23,6 +23,11 @@
                 </div>
 
                 <Credits :type="creditType" :index="card.id" :apikey="apikey"/>
+
+                <div>
+                    <span class="me-1" v-for="element in genres" :key="element.id">• {{element.name}}</span>
+                </div>
+
 
                 <p>Overview - {{card.overview}}</p>
             </div>
@@ -44,10 +49,18 @@ export default {
         Credits,
     },
 
+    data: function() {
+        return {
+            imgPath: 'https://image.tmdb.org/t/p/',
+            imgPathAlt: 'https://c.tenor.com/5JunKCV2DEIAAAAC/error404-404.gif',
+        }
+    },
+
     props: {
         card: Object,
         apikey: String,
         creditType: String,
+        genres: Array,
     },
 
     computed: {
@@ -67,7 +80,7 @@ export default {
         },
     
     created: function() {
-        console.log(this.creditType);
+        // console.log(this.creditType);
     },
 }
 

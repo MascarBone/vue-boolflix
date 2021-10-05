@@ -2,7 +2,7 @@
   <div id="app">
     <Searchbar @search="searchAPI"/>
 
-    <Catalog :moviesList="movies" :seriesList="series" :apikey="codeApiKey"/>
+    <Catalog :moviesList="movies" :seriesList="series" :apikey="apikey"/>
 
   </div>
 </template>
@@ -25,9 +25,10 @@ export default {
       movies : [],
       series : [],
 
-      codeApiKey: '4b29211095001d1a2e8e6ee5ce71ec04',
-      linkAPIMovies : 'https://api.themoviedb.org/3/search/movie',
-      linkAPITvseries : 'https://api.themoviedb.org/3/search/tv',
+      apikey: '4b29211095001d1a2e8e6ee5ce71ec04',
+      APIMovies : 'https://api.themoviedb.org/3/search/movie',
+      APITvseries : 'https://api.themoviedb.org/3/search/tv',
+
     }
   },
 
@@ -36,9 +37,9 @@ export default {
         console.log(needleQuery);
 
         // axios.get('https://api.themoviedb.org/3/search/movie?api_key=4b29211095001d1a2e8e6ee5ce71ec04&query=' + needleQuery)
-        axios.get(this.linkAPIMovies, {
+        axios.get(this.APIMovies, {
           params : {            
-            api_key: this.codeApiKey ,
+            api_key: this.apikey ,
             query: needleQuery,
           }
         })
@@ -53,9 +54,9 @@ export default {
           console.log(error);
         });
 
-        axios.get(this.linkAPITvseries, {
+        axios.get(this.APITvseries, {
           params : {            
-            'api_key': this.codeApiKey ,
+            'api_key': this.apikey ,
             query: needleQuery,
           }
         })
@@ -69,8 +70,10 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    }
+    },
+   
   },
+
 }
 </script>
 

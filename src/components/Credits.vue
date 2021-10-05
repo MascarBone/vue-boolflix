@@ -20,14 +20,14 @@ export default {
 
     data: function() {
         return {
-            linkAPICredit: 'https://api.themoviedb.org/3/',
+            linkAPICredit: 'https://api.themoviedb.org/3/'+ this.type + '/' + this.index + '/credits',
             listNames: [],
         }
     },
 
     created: function() {
         // const array = [];
-            axios.get(this.linkAPICredit + this.type + '/' + this.index + '/credits', {
+            axios.get(this.linkAPICredit, {
                 params : {
                     api_key: this.apikey,
                 }
